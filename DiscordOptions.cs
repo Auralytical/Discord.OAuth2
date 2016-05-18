@@ -15,8 +15,7 @@ namespace Discord.OAuth2
             AuthorizationEndpoint = "https://discordapp.com/api/oauth2/authorize";
             TokenEndpoint = "https://discordapp.com/api/oauth2/token";
             UserInformationEndpoint = "https://discordapp.com/api/users/@me";
-            Scope.Add("identity");
-            Scope.Add("email");
+            Scope.Add("identify");
         }
         
         /// <summary> Gets or sets the Discord-assigned appId. </summary>

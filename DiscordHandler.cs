@@ -29,14 +29,14 @@ namespace Discord.OAuth2
 
             var ticket = new AuthenticationTicket(new ClaimsPrincipal(identity), properties, Options.AuthenticationScheme);
             var context = new OAuthCreatingTicketContext(ticket, Context, Options, Backchannel, tokens, user);
-
+            
             AddClaim(identity, user, "id", ClaimTypes.NameIdentifier, ClaimValueTypes.UInteger64);
             AddClaim(identity, user, "username", ClaimTypes.Name, ClaimValueTypes.String);
             AddClaim(identity, user, "discriminator", "urn:discord:discriminator", ClaimValueTypes.String);
             AddClaim(identity, user, "avatar", "urn:discord:avatar", ClaimValueTypes.String);
             AddClaim(identity, user, "verified", "urn:discord:verified", ClaimValueTypes.Boolean);
             AddClaim(identity, user, "email", ClaimTypes.Email, ClaimValueTypes.Email);
-            AddClaim(identity, user, "bot", "urn:discord:bot", ClaimValueTypes.Boolean);
+            //AddClaim(identity, user, "bot", "urn:discord:bot", ClaimValueTypes.Boolean);
 
             await Options.Events.CreatingTicket(context);
             return context.Ticket;
