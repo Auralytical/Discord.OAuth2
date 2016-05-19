@@ -9,12 +9,12 @@ namespace Discord.OAuth2
         /// <summary> Initializes a new <see cref="DiscordOptions"/>. </summary>
         public DiscordOptions()
         {
-            AuthenticationScheme = "Discord";
+            AuthenticationScheme = DiscordDefaults.AuthenticationScheme;
             DisplayName = AuthenticationScheme;
             CallbackPath = new PathString("/signin-discord");
-            AuthorizationEndpoint = "https://discordapp.com/api/oauth2/authorize";
-            TokenEndpoint = "https://discordapp.com/api/oauth2/token";
-            UserInformationEndpoint = "https://discordapp.com/api/users/@me";
+            AuthorizationEndpoint = DiscordDefaults.AuthorizationEndpoint;
+            TokenEndpoint = DiscordDefaults.TokenEndpoint;
+            UserInformationEndpoint = DiscordDefaults.UserInformationEndpoint;
             Scope.Add("identify");
         }
         
