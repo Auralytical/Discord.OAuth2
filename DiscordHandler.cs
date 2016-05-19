@@ -36,7 +36,6 @@ namespace Discord.OAuth2
             AddClaim(identity, user, "avatar", "urn:discord:avatar", ClaimValueTypes.String);
             AddClaim(identity, user, "verified", "urn:discord:verified", ClaimValueTypes.Boolean);
             AddClaim(identity, user, "email", ClaimTypes.Email, ClaimValueTypes.Email);
-            //AddClaim(identity, user, "bot", "urn:discord:bot", ClaimValueTypes.Boolean);
 
             await Options.Events.CreatingTicket(context);
             return context.Ticket;
@@ -46,11 +45,7 @@ namespace Discord.OAuth2
         {
             string value = user.Value<string>(fieldName);
             if (!string.IsNullOrEmpty(value))
-            {
-                identity.AddClaim(new Claim(
-                    claimId, value, ClaimValueTypes.UInteger64,
-                    Options.ClaimsIssuer));
-            }
+                identity.AddClaim(new Claim(claimId, value, valueType, Options.ClaimsIssuer));
         }
     }
 }
