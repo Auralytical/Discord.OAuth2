@@ -4,9 +4,9 @@
   "authors": [ "RogueException" ],
 
   "packOptions": {
-    "tags": [ "discord", "discordapp" ],
+    "tags": [ "discord", "discordapp", "aspnetcore", "authentication", "security" ],
     "licenseUrl": "http://opensource.org/licenses/MIT",
-    "projectUrl": "https://github.com/RogueException/Discord.Authentication",
+    "projectUrl": "https://github.com/RogueException/Discord.OAuth2",
     "repository": {
       "type": "git",
       "url": "git://github.com/RogueException/Discord.OAuth2"
