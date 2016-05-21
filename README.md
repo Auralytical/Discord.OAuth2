@@ -10,8 +10,6 @@ app.UseDiscordAuthentication(new DiscordOptions
 {
     AppId = Configuration["Discord:AppId"],
     AppSecret = Configuration["Discord:AppSecret"],
-    CallbackPath = "/oauth2/discord",
-    Scope = { "identify", "guilds" },
-    SaveTokens = true
+    Scope = { "identify", "guilds" }
 });
 ```
