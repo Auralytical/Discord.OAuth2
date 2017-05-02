@@ -1,5 +1,5 @@
 # Discord.OAuth2
-[![MyGet](https://img.shields.io/myget/rogueexception/vpre/Discord.OAuth2.svg)](https://www.myget.org/feed/Packages/rogueexception) 
+[![MyGet](https://img.shields.io/myget/rogueexception/vpre/Discord.OAuth2.svg)](https://www.myget.org/feed/rogueexception/package/nuget/Discord.OAuth2) 
 [![Build status](https://ci.appveyor.com/api/projects/status/axedfea3b7j1l2ua?svg=true)](https://ci.appveyor.com/project/RogueException/discord-oauth2)
 
 ASP.Net Core middleware that enables an application to support Discord's OAuth 2.0 authentication workflow.
