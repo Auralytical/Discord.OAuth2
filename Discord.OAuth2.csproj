@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Version>1.0.1</VersionPrefix>
+    <Version>1.0.1</Version>
     <Description>ASP.Net Core middleware that enables an application to support Discord's OAuth 2.0 authentication workflow.</Description>
     <Authors>RogueException</Authors>
     <TargetFrameworks>netstandard1.3</TargetFrameworks>
@@ -13,6 +13,10 @@
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>git://github.com/RogueException/Discord.OAuth2</RepositoryUrl>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove=".gitattributes" />
+    <None Remove=".gitignore" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OAuth" Version="1.0.1" />
   </ItemGroup>
