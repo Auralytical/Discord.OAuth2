@@ -1,4 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../../Discord.OAuth2.targets" />
   <PropertyGroup>
     <Description>ASP.Net Core middleware that enables an application to support Discord's OAuth 2.0 authentication workflow.</Description>
     <RootNamespace>Discord.OAuth2</RootNamespace>
