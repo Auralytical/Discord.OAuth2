@@ -1,0 +1,26 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="../../Discord.OAuth2.targets" />
+  <PropertyGroup>
+    <VersionPrefix>1.1.0</VersionPrefix>
+    <VersionSuffix></VersionSuffix>
+    <Authors>RogueException</Authors>
+    <PackageTags>discord;discordapp;aspnetcore;authentication;security</PackageTags>
+    <PackageProjectUrl>https://github.com/RogueException/Discord.OAuth2</PackageProjectUrl>
+    <PackageLicenseUrl>http://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>git://github.com/RogueException/Discord.OAuth2</RepositoryUrl>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(BuildNumber)' == '' ">
+    <VersionSuffix Condition=" '$(VersionSuffix)' != ''">$(VersionSuffix)-dev</VersionSuffix>
+    <VersionSuffix Condition=" '$(VersionSuffix)' == ''">dev</VersionSuffix>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(BuildNumber)' != '' And $(IsTagBuild) != 'true' ">
+    <VersionSuffix Condition=" '$(VersionSuffix)' != '' ">$(VersionSuffix)-$(BuildNumber)</VersionSuffix>
+    <VersionSuffix Condition=" '$(VersionSuffix)' == '' ">build-$(BuildNumber)</VersionSuffix>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <NoWarn>$(NoWarn);CS1573;CS1591</NoWarn>
+    <WarningsAsErrors>true</WarningsAsErrors>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+</Project>
