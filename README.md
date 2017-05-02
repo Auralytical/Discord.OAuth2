@@ -1,4 +1,4 @@
-# Discord.OAuth2 v1.1.0
+# Discord.OAuth2
 [![MyGet](https://img.shields.io/myget/rogueexception/vpre/Discord.OAuth2.svg)](https://www.myget.org/feed/Packages/rogueexception) 
 [![Build status](https://ci.appveyor.com/api/projects/status/axedfea3b7j1l2ua?svg=true)](https://ci.appveyor.com/project/RogueException/discord-oauth2)
 
