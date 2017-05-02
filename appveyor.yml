@@ -20,17 +20,15 @@ install:
 build_script:
 - ps: appveyor-retry dotnet restore Discord.OAuth2.sln -v Minimal /p:BuildNumber="$Env:BUILD" /p:IsTagBuild="$Env:APPVEYOR_REPO_TAG"
 - ps: dotnet build Discord.OAuth2.sln -c Release /p:BuildNumber="$Env:BUILD" /p:IsTagBuild="$Env:APPVEYOR_REPO_TAG"
+after_build:
 - ps: dotnet pack "src\Discord.OAuth2\Discord.OAuth2.csproj" -c Release -o "../../artifacts" --no-build /p:BuildNumber="$Env:BUILD" /p:IsTagBuild="$Env:APPVEYOR_REPO_TAG"
+- ps: Get-ChildItem artifacts\*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
 
-artifacts:
-- path: artifacts/*.nupkg
-  name: MyGet
 deploy:
 - provider: NuGet
   server: https://www.myget.org/F/rogueexception/api/v2/package
   api_key:
     secure: D+vW2O2LBf/iJb4f+q8fkyIW2VdIYIGxSYLWNrOD4BHlDBZQlJipDbNarWjUr2Kn
   symbol_server: https://www.myget.org/F/rogueexception/symbols/api/v2/package
-  artifact: MyGet
   on:
     branch: master
