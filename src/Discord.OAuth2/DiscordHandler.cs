@@ -1,18 +1,20 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.OAuth;
-using Microsoft.AspNetCore.Http.Authentication;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Claims;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
 namespace Discord.OAuth2
 {
     internal class DiscordHandler : OAuthHandler<DiscordOptions>
     {
-        public DiscordHandler(HttpClient httpClient)
-            : base(httpClient)
+        public DiscordHandler(IOptionsMonitor<DiscordOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock)
+            : base(options, logger, encoder, clock)
         {
         }
 
@@ -23,29 +25,16 @@ namespace Discord.OAuth2
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             var response = await Backchannel.SendAsync(request, Context.RequestAborted);
-            response.EnsureSuccessStatusCode();
+            if (!response.IsSuccessStatusCode)
+                throw new HttpRequestException($"Failed to retrieve Discord user information ({response.StatusCode}).");
 
-            var user = JObject.Parse(await response.Content.ReadAsStringAsync());
+            var payload = JObject.Parse(await response.Content.ReadAsStringAsync());
 
-            var ticket = new AuthenticationTicket(new ClaimsPrincipal(identity), properties, Options.AuthenticationScheme);
-            var context = new OAuthCreatingTicketContext(ticket, Context, Options, Backchannel, tokens, user);
+            var context = new OAuthCreatingTicketContext(new ClaimsPrincipal(identity), properties, Context, Scheme, Options, Backchannel, tokens, payload);
+            context.RunClaimActions();
 
-            AddClaim(identity, user, "id", ClaimTypes.NameIdentifier, ClaimValueTypes.UInteger64);
-            AddClaim(identity, user, "username", ClaimTypes.Name, ClaimValueTypes.String);
-            AddClaim(identity, user, "discriminator", "urn:discord:discriminator", ClaimValueTypes.UInteger32);
-            AddClaim(identity, user, "avatar", "urn:discord:avatar", ClaimValueTypes.String);
-            AddClaim(identity, user, "verified", "urn:discord:verified", ClaimValueTypes.Boolean);
-            AddClaim(identity, user, "email", ClaimTypes.Email, ClaimValueTypes.Email);
-
-            await Options.Events.CreatingTicket(context);
-            return context.Ticket;
-        }
-
-        private void AddClaim(ClaimsIdentity identity, JToken user, string fieldName, string claimId, string valueType)
-        {
-            string value = user.Value<string>(fieldName);
-            if (!string.IsNullOrEmpty(value))
-                identity.AddClaim(new Claim(claimId, value, valueType, Options.ClaimsIssuer));
+            await Events.CreatingTicket(context);
+            return new AuthenticationTicket(context.Principal, context.Properties, Scheme.Name);
         }
     }
 }
