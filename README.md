@@ -5,7 +5,7 @@
 
 ASP.Net Core middleware that enables an application to support Discord's OAuth 2.0 authentication workflow.
 
-Based on [ASP.Net Core Facebook OAuth](https://github.com/aspnet/Security/tree/dev/src/Microsoft.AspNetCore.Authentication.Facebook)
+Based on [ASP.Net Core Facebook OAuth](https://github.com/aspnet/Security/tree/master/src/Microsoft.AspNetCore.Authentication.Facebook)
 
 ### Usage
 ```cs
