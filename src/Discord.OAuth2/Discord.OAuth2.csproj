@@ -5,6 +5,8 @@
     <RootNamespace>Discord.OAuth2</RootNamespace>
     <AssemblyName>Discord.OAuth2</AssemblyName>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Version>3.1.0-dev</Version>
+    <AssemblyVersion>3.1.0.0</AssemblyVersion>
   </PropertyGroup>
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
